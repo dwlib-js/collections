@@ -35,6 +35,7 @@ const ImmutableListInsertApply = require('@dwlib/collections/ImmutableListInsert
 const ImmutableListIsEmpty = require('@dwlib/collections/ImmutableListIsEmpty');
 const ImmutableListKeys = require('@dwlib/collections/ImmutableListKeys');
 const ImmutableListLastIndexOf = require('@dwlib/collections/ImmutableListLastIndexOf');
+const ImmutableListMap = require('@dwlib/collections/ImmutableListMap');
 const ImmutableListOf = require('@dwlib/collections/ImmutableListOf');
 const ImmutableListRemove = require('@dwlib/collections/ImmutableListRemove');
 const ImmutableListRemoveAll = require('@dwlib/collections/ImmutableListRemoveAll');
@@ -74,6 +75,7 @@ const ListInsertApply = require('@dwlib/collections/ListInsertApply');
 const ListIsEmpty = require('@dwlib/collections/ListIsEmpty');
 const ListIteratorNext = require('@dwlib/collections/ListIteratorNext');
 const ListLastIndexOf = require('@dwlib/collections/ListLastIndexOf');
+const ListMap = require('@dwlib/collections/ListMap');
 const ListOf = require('@dwlib/collections/ListOf');
 const ListRemove = require('@dwlib/collections/ListRemove');
 const ListRemoveAll = require('@dwlib/collections/ListRemoveAll');
@@ -103,6 +105,7 @@ const ReadOnlyListIndexOf = require('@dwlib/collections/ReadOnlyListIndexOf');
 const ReadOnlyListIsEmpty = require('@dwlib/collections/ReadOnlyListIsEmpty');
 const ReadOnlyListKeys = require('@dwlib/collections/ReadOnlyListKeys');
 const ReadOnlyListLastIndexOf = require('@dwlib/collections/ReadOnlyListLastIndexOf');
+const ReadOnlyListMap = require('@dwlib/collections/ReadOnlyListMap');
 const ReadOnlyListSize = require('@dwlib/collections/ReadOnlyListSize');
 const ReadOnlyListToArray = require('@dwlib/collections/ReadOnlyListToArray');
 const ReadOnlyListToImmutableList = require('@dwlib/collections/ReadOnlyListToImmutableList');
@@ -133,6 +136,7 @@ import Collections, {
   ImmutableListIsEmpty,
   ImmutableListKeys,
   ImmutableListLastIndexOf,
+  ImmutableListMap,
   ImmutableListOf,
   ImmutableListRemove,
   ImmutableListRemoveAll,
@@ -172,6 +176,7 @@ import Collections, {
   ListIsEmpty,
   ListIteratorNext,
   ListLastIndexOf,
+  ListMap,
   ListOf,
   ListRemove,
   ListRemoveAll,
@@ -201,6 +206,7 @@ import Collections, {
   ReadOnlyListIsEmpty,
   ReadOnlyListKeys,
   ReadOnlyListLastIndexOf,
+  ReadOnlyListMap,
   ReadOnlyListSize,
   ReadOnlyListToArray,
   ReadOnlyListToImmutableList,
@@ -230,6 +236,7 @@ import ImmutableListInsertApply from '@dwlib/collections/ImmutableListInsertAppl
 import ImmutableListIsEmpty from '@dwlib/collections/ImmutableListIsEmpty';
 import ImmutableListKeys from '@dwlib/collections/ImmutableListKeys';
 import ImmutableListLastIndexOf from '@dwlib/collections/ImmutableListLastIndexOf';
+import ImmutableListMap from '@dwlib/collections/ImmutableListMap';
 import ImmutableListOf from '@dwlib/collections/ImmutableListOf';
 import ImmutableListRemove from '@dwlib/collections/ImmutableListRemove';
 import ImmutableListRemoveAll from '@dwlib/collections/ImmutableListRemoveAll';
@@ -269,6 +276,7 @@ import ListInsertApply from '@dwlib/collections/ListInsertApply';
 import ListIsEmpty from '@dwlib/collections/ListIsEmpty';
 import ListIteratorNext from '@dwlib/collections/ListIteratorNext';
 import ListLastIndexOf from '@dwlib/collections/ListLastIndexOf';
+import ListMap from '@dwlib/collections/ListMap';
 import ListOf from '@dwlib/collections/ListOf';
 import ListRemove from '@dwlib/collections/ListRemove';
 import ListRemoveAll from '@dwlib/collections/ListRemoveAll';
@@ -298,6 +306,7 @@ import ReadOnlyListIndexOf from '@dwlib/collections/ReadOnlyListIndexOf';
 import ReadOnlyListIsEmpty from '@dwlib/collections/ReadOnlyListIsEmpty';
 import ReadOnlyListKeys from '@dwlib/collections/ReadOnlyListKeys';
 import ReadOnlyListLastIndexOf from '@dwlib/collections/ReadOnlyListLastIndexOf';
+import ReadOnlyListMap from '@dwlib/collections/ReadOnlyListMap';
 import ReadOnlyListSize from '@dwlib/collections/ReadOnlyListSize';
 import ReadOnlyListToArray from '@dwlib/collections/ReadOnlyListToArray';
 import ReadOnlyListToImmutableList from '@dwlib/collections/ReadOnlyListToImmutableList';
@@ -334,6 +343,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `insert(index: number, ...values: any[]?) => this | ImmutableList | ImmutableList.EMPTY`
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
+  - `map(callback: (value: any, index: number, immutableList: ImmutableList) => any) => this | ImmutableList | ImmutableList.EMPTY`
   - `remove(value: any[, fromIndex: number = 0]) => this | ImmutableList | ImmutableList.EMPTY`
   - `removeAll(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => this | ImmutableList | ImmutableList.EMPTY`
   - `removeAt(index: number) => this | ImmutableList | ImmutableList.EMPTY`
@@ -369,6 +379,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `insert(index: number, ...values: any[]?) => this`
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
+  - `map(callback: (value: any, index: number, list: List) => any) => List`
   - `remove(value: any[, fromIndex: number = 0]) => boolean`
   - `removeAll(predicate: (value: any, index: number, list: List) => boolean) => number`
   - `removeAt(index: number) => boolean`
@@ -401,6 +412,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `indexOf(value: any[, fromIndex: number = 0]) => number`
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
+  - `map(callback: (value: any, index: number, readOnlyList: ReadOnlyList) => any) => List`
   - `slice([start: number = 0[, end: number = this.size]) => List`
   - `toArray() => any[]`
   - `toImmutableList() => ImmutableList | ImmutableList.EMPTY`
@@ -428,6 +440,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListIsEmpty(immutableList: ImmutableList) => boolean`
 - `ImmutableListKeys(immutableList: ImmutableList) => ListIterator`
 - `ImmutableListLastIndexOf(immutableList: ImmutableList, value: any[, fromIndex: number = immutableList.size]) => number`
+- `ImmutableListMap(immutableList: ImmutableList, callback: (value: any, index: number, immutableList: ImmutableList) => any) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListOf(...values: any[]?) => ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListRemove(immutableList: ImmutableList, value: any[, fromIndex: number = 0]) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListRemoveAll(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => immutableList | ImmutableList | ImmutableList.EMPTY`
@@ -466,6 +479,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ListIteratorNext(listIterator: ListIterator) => IteratorResult`
 - `ListKeys(list: List) => ListIterator`
 - `ListLastIndexOf(list: List, value: any[, fromIndex: number = list.size]) => number`
+- `ListMap(list: List, callback: (value: any, index: number, list: List) => any) => List`
 - `ListOf(...values: any[]?) => List`
 - `ListRemove(list: List, value: any[, fromIndex: number = 0]) => boolean`
 - `ListRemoveAll(list: List, predicate: (value: any, index: number, list: List) => boolean) => number`
@@ -496,6 +510,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ReadOnlyListIsEmpty(readOnlyList: ReadOnlyList) => boolean`
 - `ReadOnlyListKeys(readOnlyList: ReadOnlyList) => ListIterator`
 - `ReadOnlyListLastIndexOf(readOnlyList: ReadOnlyList, value: any[, fromIndex: number = readOnlyList.size]) => number`
+- `ReadOnlyListMap(readOnlyList: ReadOnlyList, callback: (value: any, index: number, readOnlyList: ReadOnlyList) => any) => List`
 - `ReadOnlyListSize(readOnlyList: ReadOnlyList) => number`
 - `ReadOnlyListSlice(readOnlyList: ReadOnlyList, [start: number = 0[, end: number = readOnlyList.size]) => List`
 - `ReadOnlyListToArray(readOnlyList: ReadOnlyList) => any[]`
