@@ -28,6 +28,7 @@ const ImmutableListFindIndex = require('@dwlib/collections/ImmutableListFindInde
 const ImmutableListFindLast = require('@dwlib/collections/ImmutableListFindLast');
 const ImmutableListFindLastIndex = require('@dwlib/collections/ImmutableListFindLastIndex');
 const ImmutableListForEach = require('@dwlib/collections/ImmutableListForEach');
+const ImmutableListFrom = require('@dwlib/collections/ImmutableListFrom');
 const ImmutableListGet = require('@dwlib/collections/ImmutableListGet');
 const ImmutableListIndexOf = require('@dwlib/collections/ImmutableListIndexOf');
 const ImmutableListInsert = require('@dwlib/collections/ImmutableListInsert');
@@ -70,6 +71,7 @@ const ListFindIndex = require('@dwlib/collections/ListFindIndex');
 const ListFindLast = require('@dwlib/collections/ListFindLast');
 const ListFindLastIndex = require('@dwlib/collections/ListFindLastIndex');
 const ListForEach = require('@dwlib/collections/ListForEach');
+const ListFrom = require('@dwlib/collections/ListFrom');
 const ListGet = require('@dwlib/collections/ListGet');
 const ListIndexOf = require('@dwlib/collections/ListIndexOf');
 const ListInsert = require('@dwlib/collections/ListInsert');
@@ -135,6 +137,7 @@ import Collections, {
   ImmutableListFindLast,
   ImmutableListFindLastIndex,
   ImmutableListForEach,
+  ImmutableListFrom,
   ImmutableListGet,
   ImmutableListIndexOf,
   ImmutableListInsert,
@@ -177,6 +180,7 @@ import Collections, {
   ListFindLast,
   ListFindLastIndex,
   ListForEach,
+  ListFrom,
   ListGet,
   ListIndexOf,
   ListInsert,
@@ -241,6 +245,7 @@ import ImmutableListFindIndex from '@dwlib/collections/ImmutableListFindIndex';
 import ImmutableListFindLast from '@dwlib/collections/ImmutableListFindLast';
 import ImmutableListFindLastIndex from '@dwlib/collections/ImmutableListFindLastIndex';
 import ImmutableListForEach from '@dwlib/collections/ImmutableListForEach';
+import ImmutableListFrom from '@dwlib/collections/ImmutableListFrom';
 import ImmutableListGet from '@dwlib/collections/ImmutableListGet';
 import ImmutableListIndexOf from '@dwlib/collections/ImmutableListIndexOf';
 import ImmutableListInsert from '@dwlib/collections/ImmutableListInsert';
@@ -283,6 +288,7 @@ import ListFindIndex from '@dwlib/collections/ListFindIndex';
 import ListFindLast from '@dwlib/collections/ListFindLast';
 import ListFindLastIndex from '@dwlib/collections/ListFindLastIndex';
 import ListForEach from '@dwlib/collections/ListForEach';
+import ListFrom from '@dwlib/collections/ListFrom';
 import ListGet from '@dwlib/collections/ListGet';
 import ListIndexOf from '@dwlib/collections/ListIndexOf';
 import ListInsert from '@dwlib/collections/ListInsert';
@@ -338,6 +344,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `static ReadOnlyList = ReadOnlyList`
 - `class ImmutableList`
   - `static EMPTY: ImmutableList`
+  - `static from(source: Array | List | ReadOnlyList | ImmutableList | Map | Set | ArrayIterator, ListIterator, MapIterator, SetIterator, Iterable<Object> | ArrayLike[, callback: (value: any, index: number) => any]) => source | ImmutableList | ImmutableList.EMPTY`
   - `static of(...values: any[]?) => ImmutableList | ImmutableList.EMPTY`
   - `constructor([iterable: Iterable<Object>?]) => ImmutableList | ImmutableList.EMPTY`
   - `get isEmpty => boolean`
@@ -373,6 +380,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `toList() => List`
   - `values() => ListIterator`
 - `class List`
+  - `static from(source: Array | List | ReadOnlyList | ImmutableList | Map | Set | ArrayIterator, ListIterator, MapIterator, SetIterator, Iterable<Object> | ArrayLike[, callback: (value: any, index: number) => any]) => List`
   - `static of(...values: any[]?) => List`
   - `constructor([iterable: Iterable<Object>?])`
   - `get isEmpty => boolean`
@@ -456,6 +464,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListFindLast(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => any`
 - `ImmutableListFindLastIndex(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
 - `ImmutableListForEach(immutableList: ImmutableList, callback: (value: any, index: number, immutableList: ImmutableList) => void) => void`
+- `ImmutableListFrom(source: Array | List | ReadOnlyList | ImmutableList | Map | Set | ArrayIterator, ListIterator, MapIterator, SetIterator, Iterable<Object> | ArrayLike[, callback: (value: any, index: number) => any]) => source | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListGet(immutableList: ImmutableList, index: number) => any`
 - `ImmutableListIndexOf(immutableList: ImmutableList, value: any[, fromIndex: number = 0]) => number`
 - `ImmutableListInsert(immutableList: ImmutableList, index: number, ...values: any[]?) => immutableList | ImmutableList | ImmutableList.EMPTY`
@@ -495,6 +504,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ListFindLast(list: List, predicate: (value: any, index: number, list: List) => boolean) => any`
 - `ListFindLastIndex(list: List, predicate: (value: any, index: number, list: List) => boolean) => number`
 - `ListForEach(list: List, callback: (value: any, index: number, list: List) => void) => void`
+- `ListFrom(source: Array | List | ReadOnlyList | ImmutableList | Map | Set | ArrayIterator, ListIterator, MapIterator, SetIterator, Iterable<Object> | ArrayLike[, callback: (value: any, index: number) => any]) => List`
 - `ListGet(list: List, index: number) => any`
 - `ListIndexOf(list: List, value: any[, fromIndex: number = 0]) => number`
 - `ListInsert(list: List, index: number, ...values: any[]?) => boolean`
