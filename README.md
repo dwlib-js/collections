@@ -37,6 +37,7 @@ const ImmutableListKeys = require('@dwlib/collections/ImmutableListKeys');
 const ImmutableListLastIndexOf = require('@dwlib/collections/ImmutableListLastIndexOf');
 const ImmutableListMap = require('@dwlib/collections/ImmutableListMap');
 const ImmutableListOf = require('@dwlib/collections/ImmutableListOf');
+const ImmutableListPartition = require('@dwlib/collections/ImmutableListPartition');
 const ImmutableListRemove = require('@dwlib/collections/ImmutableListRemove');
 const ImmutableListRemoveAll = require('@dwlib/collections/ImmutableListRemoveAll');
 const ImmutableListRemoveAt = require('@dwlib/collections/ImmutableListRemoveAt');
@@ -61,6 +62,7 @@ const ListClear = require('@dwlib/collections/ListClear');
 const ListClone = require('@dwlib/collections/ListClone');
 const ListContains = require('@dwlib/collections/ListContains');
 const ListCount = require('@dwlib/collections/ListCount');
+const ListEntries = require('@dwlib/collections/ListEntries');
 const ListEquals = require('@dwlib/collections/ListEquals');
 const ListFilter = require('@dwlib/collections/ListFilter');
 const ListFind = require('@dwlib/collections/ListFind');
@@ -74,9 +76,11 @@ const ListInsert = require('@dwlib/collections/ListInsert');
 const ListInsertApply = require('@dwlib/collections/ListInsertApply');
 const ListIsEmpty = require('@dwlib/collections/ListIsEmpty');
 const ListIteratorNext = require('@dwlib/collections/ListIteratorNext');
+const ListKeys = require('@dwlib/collections/ListKeys');
 const ListLastIndexOf = require('@dwlib/collections/ListLastIndexOf');
 const ListMap = require('@dwlib/collections/ListMap');
 const ListOf = require('@dwlib/collections/ListOf');
+const ListPartition = require('@dwlib/collections/ListPartition');
 const ListRemove = require('@dwlib/collections/ListRemove');
 const ListRemoveAll = require('@dwlib/collections/ListRemoveAll');
 const ListRemoveAt = require('@dwlib/collections/ListRemoveAt');
@@ -86,6 +90,7 @@ const ListSize = require('@dwlib/collections/ListSize');
 const ListSlice = require('@dwlib/collections/ListSlice');
 const ListToArray = require('@dwlib/collections/ListToArray');
 const ListToImmutableList = require('@dwlib/collections/ListToImmutableList');
+const ListValues = require('@dwlib/collections/ListValues');
 const ReadOnlyList = require('@dwlib/collections/ReadOnlyList');
 const ReadOnlyListAll = require('@dwlib/collections/ReadOnlyListAll');
 const ReadOnlyListAny = require('@dwlib/collections/ReadOnlyListAny');
@@ -106,6 +111,7 @@ const ReadOnlyListIsEmpty = require('@dwlib/collections/ReadOnlyListIsEmpty');
 const ReadOnlyListKeys = require('@dwlib/collections/ReadOnlyListKeys');
 const ReadOnlyListLastIndexOf = require('@dwlib/collections/ReadOnlyListLastIndexOf');
 const ReadOnlyListMap = require('@dwlib/collections/ReadOnlyListMap');
+const ReadOnlyListPartition = require('@dwlib/collections/ReadOnlyListPartition');
 const ReadOnlyListSize = require('@dwlib/collections/ReadOnlyListSize');
 const ReadOnlyListToArray = require('@dwlib/collections/ReadOnlyListToArray');
 const ReadOnlyListToImmutableList = require('@dwlib/collections/ReadOnlyListToImmutableList');
@@ -138,6 +144,7 @@ import Collections, {
   ImmutableListLastIndexOf,
   ImmutableListMap,
   ImmutableListOf,
+  ImmutableListPartition,
   ImmutableListRemove,
   ImmutableListRemoveAll,
   ImmutableListRemoveAt,
@@ -162,6 +169,7 @@ import Collections, {
   ListClone,
   ListContains,
   ListCount,
+  ListEntries,
   ListEquals,
   ListFilter,
   ListFind,
@@ -175,9 +183,11 @@ import Collections, {
   ListInsertApply,
   ListIsEmpty,
   ListIteratorNext,
+  ListKeys,
   ListLastIndexOf,
   ListMap,
   ListOf,
+  ListPartition,
   ListRemove,
   ListRemoveAll,
   ListRemoveAt,
@@ -187,6 +197,7 @@ import Collections, {
   ListSlice,
   ListToArray,
   ListToImmutableList,
+  ListValues,
   ReadOnlyList,
   ReadOnlyListAll,
   ReadOnlyListAny,
@@ -207,6 +218,7 @@ import Collections, {
   ReadOnlyListKeys,
   ReadOnlyListLastIndexOf,
   ReadOnlyListMap,
+  ReadOnlyListPartition,
   ReadOnlyListSize,
   ReadOnlyListToArray,
   ReadOnlyListToImmutableList,
@@ -238,6 +250,7 @@ import ImmutableListKeys from '@dwlib/collections/ImmutableListKeys';
 import ImmutableListLastIndexOf from '@dwlib/collections/ImmutableListLastIndexOf';
 import ImmutableListMap from '@dwlib/collections/ImmutableListMap';
 import ImmutableListOf from '@dwlib/collections/ImmutableListOf';
+import ImmutableListPartition from '@dwlib/collections/ImmutableListPartition';
 import ImmutableListRemove from '@dwlib/collections/ImmutableListRemove';
 import ImmutableListRemoveAll from '@dwlib/collections/ImmutableListRemoveAll';
 import ImmutableListRemoveAt from '@dwlib/collections/ImmutableListRemoveAt';
@@ -262,6 +275,7 @@ import ListClear from '@dwlib/collections/ListClear';
 import ListClone from '@dwlib/collections/ListClone';
 import ListContains from '@dwlib/collections/ListContains';
 import ListCount from '@dwlib/collections/ListCount';
+import ListEntries from '@dwlib/collections/ListEntries';
 import ListEquals from '@dwlib/collections/ListEquals';
 import ListFilter from '@dwlib/collections/ListFilter';
 import ListFind from '@dwlib/collections/ListFind';
@@ -275,9 +289,11 @@ import ListInsert from '@dwlib/collections/ListInsert';
 import ListInsertApply from '@dwlib/collections/ListInsertApply';
 import ListIsEmpty from '@dwlib/collections/ListIsEmpty';
 import ListIteratorNext from '@dwlib/collections/ListIteratorNext';
+import ListKeys from '@dwlib/collections/ListKeys';
 import ListLastIndexOf from '@dwlib/collections/ListLastIndexOf';
 import ListMap from '@dwlib/collections/ListMap';
 import ListOf from '@dwlib/collections/ListOf';
+import ListPartition from '@dwlib/collections/ListPartition';
 import ListRemove from '@dwlib/collections/ListRemove';
 import ListRemoveAll from '@dwlib/collections/ListRemoveAll';
 import ListRemoveAt from '@dwlib/collections/ListRemoveAt';
@@ -287,6 +303,7 @@ import ListSize from '@dwlib/collections/ListSize';
 import ListSlice from '@dwlib/collections/ListSlice';
 import ListToArray from '@dwlib/collections/ListToArray';
 import ListToImmutableList from '@dwlib/collections/ListToImmutableList';
+import ListValues from '@dwlib/collections/ListValues';
 import ReadOnlyList from '@dwlib/collections/ReadOnlyList';
 import ReadOnlyListAll from '@dwlib/collections/ReadOnlyListAll';
 import ReadOnlyListAny from '@dwlib/collections/ReadOnlyListAny';
@@ -307,6 +324,7 @@ import ReadOnlyListIsEmpty from '@dwlib/collections/ReadOnlyListIsEmpty';
 import ReadOnlyListKeys from '@dwlib/collections/ReadOnlyListKeys';
 import ReadOnlyListLastIndexOf from '@dwlib/collections/ReadOnlyListLastIndexOf';
 import ReadOnlyListMap from '@dwlib/collections/ReadOnlyListMap';
+import ReadOnlyListPartition from '@dwlib/collections/ReadOnlyListPartition';
 import ReadOnlyListSize from '@dwlib/collections/ReadOnlyListSize';
 import ReadOnlyListToArray from '@dwlib/collections/ReadOnlyListToArray';
 import ReadOnlyListToImmutableList from '@dwlib/collections/ReadOnlyListToImmutableList';
@@ -344,6 +362,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
   - `map(callback: (value: any, index: number, immutableList: ImmutableList) => any) => this | ImmutableList | ImmutableList.EMPTY`
+  - `partition(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => Array<firstImmutableList: this | ImmutableList | ImmutableList.EMPTY, secondImmutableList: this | ImmutableList | ImmutableList.EMPTY>`
   - `remove(value: any[, fromIndex: number = 0]) => this | ImmutableList | ImmutableList.EMPTY`
   - `removeAll(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => this | ImmutableList | ImmutableList.EMPTY`
   - `removeAt(index: number) => this | ImmutableList | ImmutableList.EMPTY`
@@ -380,6 +399,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
   - `map(callback: (value: any, index: number, list: List) => any) => List`
+  - `partition(predicate: (value: any, index: number, list: List) => boolean) => Array<firstList: List, secondList: List>`
   - `remove(value: any[, fromIndex: number = 0]) => boolean`
   - `removeAll(predicate: (value: any, index: number, list: List) => boolean) => number`
   - `removeAt(index: number) => boolean`
@@ -413,6 +433,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `keys() => ListIterator`
   - `lastIndexOf(value: any[, fromIndex: number = this.size]) => number`
   - `map(callback: (value: any, index: number, readOnlyList: ReadOnlyList) => any) => List`
+  - `partition(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => Array<firstList: List, secondList: List>`
   - `slice([start: number = 0[, end: number = this.size]) => List`
   - `toArray() => any[]`
   - `toImmutableList() => ImmutableList | ImmutableList.EMPTY`
@@ -426,6 +447,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListClear(immutableList: ImmutableList) => ImmutableList.EMPTY`
 - `ImmutableListContains(immutableList: ImmutableList, value: any) => boolean`
 - `ImmutableListCount(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
+- `ImmutableListEMPTY = ImmutableList.EMPTY`
 - `ImmutableListEntries(immutableList: ImmutableList) => ListIterator`
 - `ImmutableListEquals(immutableList: ImmutableList, other: any) => boolean`
 - `ImmutableListFilter(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => immutableList | ImmutableList | ImmutableList.EMPTY`
@@ -442,6 +464,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListLastIndexOf(immutableList: ImmutableList, value: any[, fromIndex: number = immutableList.size]) => number`
 - `ImmutableListMap(immutableList: ImmutableList, callback: (value: any, index: number, immutableList: ImmutableList) => any) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListOf(...values: any[]?) => ImmutableList | ImmutableList.EMPTY`
+- `ImmutableListPartition(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => Array<firstImmutableList: immutableList | ImmutableList | ImmutableList.EMPTY, secondImmutableList: immutableList | ImmutableList | ImmutableList.EMPTY>`
 - `ImmutableListRemove(immutableList: ImmutableList, value: any[, fromIndex: number = 0]) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListRemoveAll(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListRemoveAt(immutableList: ImmutableList, index: number) => immutableList | ImmutableList | ImmutableList.EMPTY`
@@ -481,6 +504,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ListLastIndexOf(list: List, value: any[, fromIndex: number = list.size]) => number`
 - `ListMap(list: List, callback: (value: any, index: number, list: List) => any) => List`
 - `ListOf(...values: any[]?) => List`
+- `ListPartition(list: List, predicate: (value: any, index: number, list: List) => boolean) => Array<firstList: List, secondList: List>`
 - `ListRemove(list: List, value: any[, fromIndex: number = 0]) => boolean`
 - `ListRemoveAll(list: List, predicate: (value: any, index: number, list: List) => boolean) => number`
 - `ListRemoveAt(list: List, index: number) => boolean`
@@ -511,6 +535,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ReadOnlyListKeys(readOnlyList: ReadOnlyList) => ListIterator`
 - `ReadOnlyListLastIndexOf(readOnlyList: ReadOnlyList, value: any[, fromIndex: number = readOnlyList.size]) => number`
 - `ReadOnlyListMap(readOnlyList: ReadOnlyList, callback: (value: any, index: number, readOnlyList: ReadOnlyList) => any) => List`
+- `ReadOnlyListPartition(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => Array<firstList: List, secondList: List>`
 - `ReadOnlyListSize(readOnlyList: ReadOnlyList) => number`
 - `ReadOnlyListSlice(readOnlyList: ReadOnlyList, [start: number = 0[, end: number = readOnlyList.size]) => List`
 - `ReadOnlyListToArray(readOnlyList: ReadOnlyList) => any[]`
