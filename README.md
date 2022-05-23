@@ -24,6 +24,7 @@ const ImmutableListEntries = require('@dwlib/collections/ImmutableListEntries');
 const ImmutableListEquals = require('@dwlib/collections/ImmutableListEquals');
 const ImmutableListFilter = require('@dwlib/collections/ImmutableListFilter');
 const ImmutableListFind = require('@dwlib/collections/ImmutableListFind');
+const ImmutableListFindAll = require('@dwlib/collections/ImmutableListFindAll');
 const ImmutableListFindIndex = require('@dwlib/collections/ImmutableListFindIndex');
 const ImmutableListFindLast = require('@dwlib/collections/ImmutableListFindLast');
 const ImmutableListFindLastIndex = require('@dwlib/collections/ImmutableListFindLastIndex');
@@ -67,6 +68,7 @@ const ListEntries = require('@dwlib/collections/ListEntries');
 const ListEquals = require('@dwlib/collections/ListEquals');
 const ListFilter = require('@dwlib/collections/ListFilter');
 const ListFind = require('@dwlib/collections/ListFind');
+const ListFindAll = require('@dwlib/collections/ListFindAll');
 const ListFindIndex = require('@dwlib/collections/ListFindIndex');
 const ListFindLast = require('@dwlib/collections/ListFindLast');
 const ListFindLastIndex = require('@dwlib/collections/ListFindLastIndex');
@@ -103,6 +105,7 @@ const ReadOnlyListEntries = require('@dwlib/collections/ReadOnlyListEntries');
 const ReadOnlyListEquals = require('@dwlib/collections/ReadOnlyListEquals');
 const ReadOnlyListFilter = require('@dwlib/collections/ReadOnlyListFilter');
 const ReadOnlyListFind = require('@dwlib/collections/ReadOnlyListFind');
+const ReadOnlyListFindAll = require('@dwlib/collections/ReadOnlyListFindAll');
 const ReadOnlyListFindIndex = require('@dwlib/collections/ReadOnlyListFindIndex');
 const ReadOnlyListFindLast = require('@dwlib/collections/ReadOnlyListFindLast');
 const ReadOnlyListFindLastIndex = require('@dwlib/collections/ReadOnlyListFindLastIndex');
@@ -133,6 +136,7 @@ import Collections, {
   ImmutableListEquals,
   ImmutableListFilter,
   ImmutableListFind,
+  ImmutableListFindAll,
   ImmutableListFindIndex,
   ImmutableListFindLast,
   ImmutableListFindLastIndex,
@@ -176,6 +180,7 @@ import Collections, {
   ListEquals,
   ListFilter,
   ListFind,
+  ListFindAll,
   ListFindIndex,
   ListFindLast,
   ListFindLastIndex,
@@ -212,6 +217,7 @@ import Collections, {
   ReadOnlyListEquals,
   ReadOnlyListFilter,
   ReadOnlyListFind,
+  ReadOnlyListFindAll,
   ReadOnlyListFindIndex,
   ReadOnlyListFindLast,
   ReadOnlyListFindLastIndex,
@@ -241,6 +247,7 @@ import ImmutableListEntries from '@dwlib/collections/ImmutableListEntries';
 import ImmutableListEquals from '@dwlib/collections/ImmutableListEquals';
 import ImmutableListFilter from '@dwlib/collections/ImmutableListFilter';
 import ImmutableListFind from '@dwlib/collections/ImmutableListFind';
+import ImmutableListFindAll from '@dwlib/collections/ImmutableListFindAll';
 import ImmutableListFindIndex from '@dwlib/collections/ImmutableListFindIndex';
 import ImmutableListFindLast from '@dwlib/collections/ImmutableListFindLast';
 import ImmutableListFindLastIndex from '@dwlib/collections/ImmutableListFindLastIndex';
@@ -284,6 +291,7 @@ import ListEntries from '@dwlib/collections/ListEntries';
 import ListEquals from '@dwlib/collections/ListEquals';
 import ListFilter from '@dwlib/collections/ListFilter';
 import ListFind from '@dwlib/collections/ListFind';
+import ListFindAll from '@dwlib/collections/ListFindAll';
 import ListFindIndex from '@dwlib/collections/ListFindIndex';
 import ListFindLast from '@dwlib/collections/ListFindLast';
 import ListFindLastIndex from '@dwlib/collections/ListFindLastIndex';
@@ -320,6 +328,7 @@ import ReadOnlyListEntries from '@dwlib/collections/ReadOnlyListEntries';
 import ReadOnlyListEquals from '@dwlib/collections/ReadOnlyListEquals';
 import ReadOnlyListFilter from '@dwlib/collections/ReadOnlyListFilter';
 import ReadOnlyListFind from '@dwlib/collections/ReadOnlyListFind';
+import ReadOnlyListFindAll from '@dwlib/collections/ReadOnlyListFindAll';
 import ReadOnlyListFindIndex from '@dwlib/collections/ReadOnlyListFindIndex';
 import ReadOnlyListFindLast from '@dwlib/collections/ReadOnlyListFindLast';
 import ReadOnlyListFindLastIndex from '@dwlib/collections/ReadOnlyListFindLastIndex';
@@ -359,6 +368,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `equals(other: any) => boolean`
   - `filter(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => this | ImmutableList | ImmutableList.EMPTY`
   - `find(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => any`
+  - `findAll(predicate: (value: any, index: number) => boolean) => ListIterator`
   - `findIndex(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
   - `findLast(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => any`
   - `findLastIndex(predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
@@ -397,6 +407,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `equals(other: any) => boolean`
   - `filter(predicate: (value: any, index: number, list: List) => boolean) => List`
   - `find(predicate: (value: any, index: number, list: List) => boolean) => any`
+  - `findAll(predicate: (value: any, index: number) => boolean) => ListIterator`
   - `findIndex(predicate: (value: any, index: number, list: List) => boolean) => number`
   - `findLast(predicate: (value: any, index: number, list: List) => boolean) => any`
   - `findLastIndex(predicate: (value: any, index: number, list: List) => boolean) => number`
@@ -432,6 +443,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `equals(other: any) => boolean`
   - `filter(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => List`
   - `find(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => any`
+  - `findAll(predicate: (value: any, index: number) => boolean) => ListIterator`
   - `findIndex(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => number`
   - `findLast(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => any`
   - `findLastIndex(predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => number`
@@ -460,6 +472,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListEquals(immutableList: ImmutableList, other: any) => boolean`
 - `ImmutableListFilter(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListFind(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => any`
+- `ImmutableListFindAll(immutableList: ImmutableList, predicate: (value: any, index: number) => boolean) => ListIterator`
 - `ImmutableListFindIndex(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
 - `ImmutableListFindLast(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => any`
 - `ImmutableListFindLastIndex(immutableList: ImmutableList, predicate: (value: any, index: number, immutableList: ImmutableList) => boolean) => number`
@@ -500,6 +513,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ListEquals(list: List, other: any) => boolean`
 - `ListFilter(list: List, predicate: (value: any, index: number, list: List) => boolean) => List`
 - `ListFind(list: List, predicate: (value: any, index: number, list: List) => boolean) => any`
+- `ListFindAll(list: List, predicate: (value: any, index: number) => boolean) => ListIterator`
 - `ListFindIndex(list: List, predicate: (value: any, index: number, list: List) => boolean) => number`
 - `ListFindLast(list: List, predicate: (value: any, index: number, list: List) => boolean) => any`
 - `ListFindLastIndex(list: List, predicate: (value: any, index: number, list: List) => boolean) => number`
@@ -535,6 +549,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ReadOnlyListEquals(readOnlyList: ReadOnlyList, other: any) => boolean`
 - `ReadOnlyListFilter(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => List`
 - `ReadOnlyListFind(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => any`
+- `ReadOnlyListFindAll(readOnlyList: ReadOnlyList, predicate: (value: any, index: number) => boolean) => ListIterator`
 - `ReadOnlyListFindIndex(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => number`
 - `ReadOnlyListFindLast(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => any`
 - `ReadOnlyListFindLastIndex(readOnlyList: ReadOnlyList, predicate: (value: any, index: number, readOnlyList: ReadOnlyList) => boolean) => number`
