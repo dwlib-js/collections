@@ -47,6 +47,7 @@ const ImmutableListReverse = require('@dwlib/collections/ImmutableListReverse');
 const ImmutableListSet = require('@dwlib/collections/ImmutableListSet');
 const ImmutableListSize = require('@dwlib/collections/ImmutableListSize');
 const ImmutableListSlice = require('@dwlib/collections/ImmutableListSlice');
+const ImmutableListSort = require('@dwlib/collections/ImmutableListSort');
 const ImmutableListToArray = require('@dwlib/collections/ImmutableListToArray');
 const ImmutableListToList = require('@dwlib/collections/ImmutableListToList');
 const ImmutableListValues = require('@dwlib/collections/ImmutableListValues');
@@ -92,6 +93,7 @@ const ListReverse = require('@dwlib/collections/ListReverse');
 const ListSet = require('@dwlib/collections/ListSet');
 const ListSize = require('@dwlib/collections/ListSize');
 const ListSlice = require('@dwlib/collections/ListSlice');
+const ListSort = require('@dwlib/collections/ListSort');
 const ListToArray = require('@dwlib/collections/ListToArray');
 const ListToImmutableList = require('@dwlib/collections/ListToImmutableList');
 const ListValues = require('@dwlib/collections/ListValues');
@@ -159,6 +161,7 @@ import Collections, {
   ImmutableListSet,
   ImmutableListSize,
   ImmutableListSlice,
+  ImmutableListSort,
   ImmutableListToArray,
   ImmutableListToList,
   ImmutableListValues,
@@ -204,6 +207,7 @@ import Collections, {
   ListSet,
   ListSize,
   ListSlice,
+  ListSort,
   ListToArray,
   ListToImmutableList,
   ListValues,
@@ -270,6 +274,7 @@ import ImmutableListReverse from '@dwlib/collections/ImmutableListReverse';
 import ImmutableListSet from '@dwlib/collections/ImmutableListSet';
 import ImmutableListSize from '@dwlib/collections/ImmutableListSize';
 import ImmutableListSlice from '@dwlib/collections/ImmutableListSlice';
+import ImmutableListSort from '@dwlib/collections/ImmutableListSort';
 import ImmutableListToArray from '@dwlib/collections/ImmutableListToArray';
 import ImmutableListToList from '@dwlib/collections/ImmutableListToList';
 import ImmutableListValues from '@dwlib/collections/ImmutableListValues';
@@ -315,6 +320,7 @@ import ListReverse from '@dwlib/collections/ListReverse';
 import ListSet from '@dwlib/collections/ListSet';
 import ListSize from '@dwlib/collections/ListSize';
 import ListSlice from '@dwlib/collections/ListSlice';
+import ListSort from '@dwlib/collections/ListSort';
 import ListToArray from '@dwlib/collections/ListToArray';
 import ListToImmutableList from '@dwlib/collections/ListToImmutableList';
 import ListValues from '@dwlib/collections/ListValues';
@@ -386,6 +392,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `reverse([start: number = 0[, end: number = this.size]) => this | ImmutableList | ImmutableList.EMPTY`
   - `set(index: number, value: any) => this | ImmutableList | ImmutableList.EMPTY`
   - `slice([start: number = 0[, end: number = this.size]) => this | ImmutableList | ImmutableList.EMPTY`
+  - `sort([comparer: (a, b) => number[, start = 0[, end: number = this.size]]]) => this | ImmutableList | ImmutableList.EMPTY`
   - `toArray() => any[]`
   - `toList() => List`
   - `values() => ListIterator`
@@ -425,6 +432,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
   - `reverse([start: number = 0[, end: number = this.size]) => this`
   - `set(index: number, value: any) => this`
   - `slice([start: number = 0[, end: number = this.size]) => List`
+  - `sort([comparer: (a, b) => number[, start = 0[, end: number = this.size]]]) => this`
   - `toArray() => any[]`
   - `toImmutableList() => ImmutableList | ImmutableList.EMPTY`
   - `values() => ListIterator`
@@ -494,6 +502,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ImmutableListSet(immutableList: ImmutableList, index: number, value: any) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListSize(immutableList: ImmutableList) => number`
 - `ImmutableListSlice(immutableList: ImmutableList[, start: number = 0[, end: number = immutableList.size]) => immutableList | ImmutableList | ImmutableList.EMPTY`
+- `ImmutableListSort(immutableList: ImmutableList[, comparer: (a, b) => number[, start: number = 0[, end: number = immutableList.size]]]) => immutableList | ImmutableList | ImmutableList.EMPTY`
 - `ImmutableListToArray(immutableList: ImmutableList) => any[]`
 - `ImmutableListToList(immutableList: ImmutableList) => List`
 - `ImmutableListValues(immutableList: ImmutableList) => ListIterator`
@@ -536,6 +545,7 @@ import ReadOnlyListValues from '@dwlib/collections/ReadOnlyListValues';
 - `ListSet(list: List, index: number, value: any) => boolean`
 - `ListSize(list: List) => number`
 - `ListSlice(list: List, [start: number = 0[, end: number = list.size]) => List`
+- `ListSort(list: List[, comparer: (a, b) => number[, start: number = 0[, end: number = list.size]]]) => void`
 - `ListToArray(list: List) => any[]`
 - `ListToImmutableList(list: List) => ImmutableList | ImmutableList.EMPTY`
 - `ListValues(list: List) => ListIterator`
